@@ -1,0 +1,102 @@
+[
+{
+"id": "rec_0001",
+"title": "Calculus III Midterm Exam Prep",
+"dueDate": "2026-10-19",
+"duration": 120,
+"tag": "exam-prep",
+"notes": "Focus on multivariable derivatives and vector fields in Room 302",
+"createdAt": "2026-10-18T10:00:00.000Z",
+"updatedAt": "2026-10-18T10:00:00.000Z"
+},
+{
+"id": "rec_0002",
+"title": "Quick Coffee with Academic Advisor",
+"dueDate": "2026-10-20",
+"duration": 15,
+"tag": "meeting",
+"notes": "Discuss spring semester course registration & credit transfer",
+"createdAt": "2026-10-17T14:30:00.000Z",
+"updatedAt": "2026-10-17T14:30:00.000Z"
+},
+{
+"id": "rec_0003",
+"title": "All-Day Hackathon Sprint",
+"dueDate": "2026-10-31",
+"duration": 720,
+"tag": "project-work",
+"notes": "Building offline-first web app at Student Union - Room 101",
+"createdAt": "2026-10-15T09:00:00.000Z",
+"updatedAt": "2026-10-16T11:20:00.000Z"
+},
+{
+"id": "rec_0004",
+"title": "Zero Minute Task Checklist Review",
+"dueDate": "2026-11-01",
+"duration": 0,
+"tag": "admin",
+"notes": "Clear inbox and archive old assignment drafts",
+"createdAt": "2026-10-18T18:00:00.000Z",
+"updatedAt": "2026-10-18T18:00:00.000Z"
+},
+{
+"id": "rec_0005",
+"title": "Chemistry Lab Experiment - Titration",
+"dueDate": "2026-12-31",
+"duration": 180,
+"tag": "lab-session",
+"notes": "End of year cumulative practical assessment in Science Annex 204",
+"createdAt": "2026-10-01T08:15:00.000Z",
+"updatedAt": "2026-10-01T08:15:00.000Z"
+},
+{
+"id": "rec_0006",
+"title": "Leap Day Research Symposium",
+"dueDate": "2028-02-29",
+"duration": 240,
+"tag": "research-symposium",
+"notes": "Special leap year poster presentation on climate modeling",
+"createdAt": "2026-10-10T12:00:00.000Z",
+"updatedAt": "2026-10-10T12:00:00.000Z"
+},
+{
+"id": "rec_0007",
+"title": "Library Book Return & Fine Settlement",
+"dueDate": "2026-01-15",
+"duration": 10,
+"tag": "errands",
+"notes": "Past overdue deadline item test for main desk archive",
+"createdAt": "2026-01-02T16:45:00.000Z",
+"updatedAt": "2026-01-05T09:10:00.000Z"
+},
+{
+"id": "rec_0008",
+"title": "Web Architecture & UX/UI Review Session",
+"dueDate": "2026-10-25",
+"duration": 90,
+"tag": "study-group",
+"notes": "Testing tricky characters: @tag:study, 12:30, & special symbols",
+"createdAt": "2026-10-18T19:00:00.000Z",
+"updatedAt": "2026-10-18T19:00:00.000Z"
+},
+{
+"id": "rec_0009",
+"title": "Maximum Duration Marathon Study Block",
+"dueDate": "2026-11-15",
+"duration": 99999,
+"tag": "marathon-study",
+"notes": "Upper limit duration edge case test boundary value",
+"createdAt": "2026-10-12T07:30:00.000Z",
+"updatedAt": "2026-10-12T07:30:00.000Z"
+},
+{
+"id": "rec_00010",
+"title": "Campus Life Committee Meeting",
+"dueDate": "2026-10-28",
+"duration": 45,
+"tag": "committee",
+"notes": "Quarterly budget review and student organization funding allocations",
+"createdAt": "2026-10-14T11:00:00.000Z",
+"updatedAt": "2026-10-14T11:00:00.000Z"
+}
+]
