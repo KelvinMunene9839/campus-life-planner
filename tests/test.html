@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validator Unit Tests</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 2rem; }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Validation Test Suite</h1>
+    <ul id="test-results"></ul>
+
+    <script type="module">
+        import { validateRecord } from './scripts/validators.js';
+
+        function assert(description, condition) {
+            const li = document.createElement('li');
+            li.className = condition ? 'pass' : 'fail';
+            li.textContent = `${condition ? '✓ PASS' : '✗ FAIL'}: ${description}`;
+            document.getElementById('test-results').appendChild(li);
+        }
+
+        // Test Cases
+        assert("Valid record passes", Object.keys(validateRecord({
+            title: "Study session",
+            dueDate: "2026-10-20",
+            duration: "60",
+            tag: "study",
+            notes: "Library room 3"
+        })).length === 0);
+
+        assert("Detects repeated consecutive words in title", validateRecord({
+            title: "Study Study session",
+            dueDate: "2026-10-20",
+            duration: "60",
+            tag: "study"
+        }).title !== undefined);
+
+        assert("Rejects invalid YYYY-MM-DD date", validateRecord({
+            title: "Meeting",
+            dueDate: "2026-02-31",
+            duration: "30",
+            tag: "meeting"
+        }).dueDate !== undefined);
+
+        assert("Rejects negative duration", validateRecord({
+            title: "Exam",
+            dueDate: "2026-10-20",
+            duration: "-15",
+            tag: "exam"
+        }).duration !== undefined);
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Planner | Student Dashboard</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    
+    <div class="app-container">
+        <!-- Dashboard Sidebar Header -->
+        <header class="site-header">
+            <div>
+                <div class="brand-wrapper">
+                    <p class="eyebrow">Student Productivity</p>
+                    <h1 class="site-title">Campus Planner</h1>
+                </div>
+              <nav class="primary-nav" aria-label="Primary navigation">
+    <a href="#dashboard" class="nav-link active">Dashboard</a>
+    <a href="#records" class="nav-link">Records Table</a>
+    <a href="#editor" class="nav-link">Add Event</a>
+    <a href="#settings" class="nav-link">Settings</a>
+    <a href="#about" class="nav-link">About</a>
+</nav>
+            </div>
+            <button id="theme-toggle" class="button button-secondary" type="button" aria-pressed="false">Dark Mode</button>
+        </header>
+
+        <!-- Dashboard Content Container -->
+        <main id="main-content" class="dashboard-main" tabindex="-1">
+            <div id="app-status" class="status" role="status" aria-live="polite">Welcome back! Application ready.</div>
+
+            <!-- Dashboard Overview Section -->
+            <section id="dashboard" aria-labelledby="dashboard-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">At a glance</p>
+                        <h2 id="dashboard-title">Dashboard Overview</h2>
+                    </div>
+                    <button id="seed-button" class="button button-secondary" type="button">Load Example Data</button>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card"><span>Total Records</span><strong id="stat-total">0</strong></article>
+                    <article class="stat-card"><span>Total Minutes</span><strong id="stat-minutes">0</strong></article>
+                    <article class="stat-card"><span>Top Category</span><strong id="stat-tag">-</strong></article>
+                    <article class="stat-card"><span>Due in 7 Days</span><strong id="stat-week">0</strong></article>
+                </div>
+
+                <div class="dashboard-grid">
+                    <article class="panel">
+                        <h3>Seven-Day Activity</h3>
+                        <div id="trend-chart" class="trend-chart" aria-label="Records created in the last seven days"></div>
+                    </article>
+                    <article class="panel">
+                        <h3>Weekly Workload Target</h3>
+                        <label for="cap-input">Target Limit (minutes)</label>
+                        <div class="inline-form" style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                            <input id="cap-input" type="number" min="0" step="15" inputmode="numeric" placeholder="e.g. 300">
+                            <button id="cap-save" class="button" type="button">Save Target</button>
+                        </div>
+                        <p id="cap-message" class="live-message" role="status" aria-live="polite" style="margin-top: 0.75rem;">Set a target to manage study strain.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Table & Schedule Section -->
+            <section id="records" aria-labelledby="records-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Your Schedule</p>
+                        <h2 id="records-title">Planner Records</h2>
+                    </div>
+                    <div class="toolbar" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <input id="search-input" type="search" placeholder="Regex search (e.g., ^@tag:study)" style="width: 260px;">
+                        <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.35rem;">
+                            <input id="case-toggle" type="checkbox"> Case sensitive
+                        </label>
+                    </div>
+                </div>
+                <p id="search-error" class="field-error" role="alert"></p>
+                
+                <div class="table-wrap">
+                    <table>
+                        <caption class="sr-only">Campus tasks and scheduled events</caption>
+                        <thead>
+                            <tr>
+                                <th><button class="sort-button" data-sort="title" type="button">Title ↕</button></th>
+                                <th><button class="sort-button" data-sort="dueDate" type="button">Due Date ↕</button></th>
+                                <th><button class="sort-button" data-sort="duration" type="button">Duration ↕</button></th>
+                                <th>Tag</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="records-body"></tbody>
+                    </table>
+                </div>
+                <p id="empty-state" class="empty-state" style="text-align: center; color: var(--text-muted); margin-top: 1.5rem;">No records found. Add your first task or load examples above.</p>
+            </section>
+
+            <!-- Record Editor Form -->
+            <section id="editor" aria-labelledby="editor-title" class="panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Plan something</p>
+                        <h2 id="editor-title">Add Record</h2>
+                    </div>
+                </div>
+                <form id="record-form" novalidate>
+                    <input id="record-id" type="hidden">
+                    <div class="form-grid">
+                        <div class="field field-wide">
+                            <label for="title">Title</label>
+                            <input id="title" type="text" required maxlength="100" placeholder="Study session at library">
+                            <small>Clear title without repeated words or extra whitespace.</small>
+                            <p class="field-error" data-error="title"></p>
+                        </div>
+                        <div class="field">
+                            <label for="due-date">Due Date</label>
+                            <input id="due-date" name="duedate" type="date" required>
+                            <p class="field-error" data-error="dueDate"></p>
+                        </div>
+                        <div class="field">
+                            <label for="duration">Duration (minutes)</label>
+                            <input id="duration" name="duration" type="number" min="0" max="99999" step="1" required inputmode="numeric">
+                            <p class="field-error" data-error="duration"></p>
+                        </div>
+                        <div class="field">
+                            <label for="tag">Tag</label>
+                            <input id="tag" name="tag" placeholder="study" required>
+                            <small>Letters and hyphens only.</small>
+                            <p class="field-error" data-error="tag"></p>
+                        </div>
+                        <div class="field field-wide">
+                            <label for="notes">Notes <span style="color: var(--text-muted);">(optional)</span></label>
+                            <textarea id="notes" name="notes" rows="3" maxlength="300" placeholder="Room number, preparation, or key details"></textarea>
+                            <p class="field-error" data-error="notes"></p>
+                        </div>
+                    </div>
+                    <div class="form-actions" style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+                        <button id="save-button" class="button" type="submit">Save Record</button>
+                        <button id="cancel-edit" class="button button-ghost" type="button" hidden>Cancel Edit</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Settings & Portability -->
+            <section id="settings" aria-labelledby="settings-title" class="panel">
+                <p class="eyebrow">Control your data</p>
+                <h2 id="settings-title">Settings</h2>
+                <div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <h3>Data Portability</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Export your planner records as JSON/CSV or restore from a JSON backup file.</p>
+                        <div class="button-row" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+                            <button id="export-json" class="button button-secondary" type="button">Export JSON</button>
+                            <button id="export-csv" class="button button-secondary" type="button">Export CSV</button>
+                            <label class="button button-secondary" for="import-json" style="margin: 0;">Import JSON</label>
+                            <input id="import-json" type="file" accept="application/json,.json" hidden>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Unit Calculations</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Planned durations conversion:</p>
+                        <p><strong id="unit-preview">0 minutes = 0.00 hours</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" aria-labelledby="about-title" class="about">
+                <p class="eyebrow">Built for campus life</p>
+                <h2 id="about-title">About</h2>
+                <p>Campus Life Planner keeps assignments, appointments, study blocks, and activities organized in one lightweight offline-first dashboard.</p>
+                <p>Contact: <a href="https://github.com/KelvinMunene9839" rel="noreferrer">GitHub</a> · <a href="mailto:kelvinnyagah9839@gmail.com">kelvinnyagah9839@gmail.com.com</a></p>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
